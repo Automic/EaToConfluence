@@ -1,0 +1,20 @@
+<tr bgcolor=ffffff>
+  <!-- The left-hand table cell should contain usage examples -->
+  <td>
+  	{eadiagram:project=dev|guid={98FEA9C8-4066-4829-B9DE-9864FB275D8E}}
+  </td>
+ 
+  <!-- The right-hand cell describes the macro and its available arguments -->
+  <!-- and may include sample output -->
+  <td>
+    <p>
+      Embeds an Enterprise Architect diagram into the page.
+ 
+    <!-- Provide a list of all possible macro arguments -->
+    <ul>
+      <li><b>project:</b> - the name of the EA project.</li>
+      <li><b>guid:</b> - the diagram guid. (Right Click -> Copy Reference -> Copy Node GUID to Clipboard)</li>
+    </ul>
+    </p>
+   </td>
+</tr>

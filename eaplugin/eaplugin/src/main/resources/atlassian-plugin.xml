@@ -1,0 +1,38 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="eaplugin"/>
+    
+<!--     add our web resources -->
+<!--     <web-resource key="eaplugin-resources" name="eaplugin Web Resources"> -->
+<!--         <dependency>com.atlassian.auiplugin:ajs</dependency> -->
+        
+<!--         <resource type="download" name="eaplugin.css" location="/css/eaplugin.css"/> -->
+<!--         <resource type="download" name="eaplugin.js" location="/js/eaplugin.js"/> -->
+<!--         <resource type="download" name="images/" location="/images"/> -->
+
+<!--         <context>eaplugin</context> -->
+<!--     </web-resource> -->
+    
+    <!-- Show Diagram Macros -->
+    <macro name="eadiagram" class="com.automic.confluence.eaplugin.EaDiagramMacro" key="eadiagram">
+    	<description>Shows an Enterprise Architect diagram with a given GUID.</description>
+    	<category>external-content</category>
+    	<parameters>
+    		<parameter name="project" type="string" required="true"></parameter>
+    		<parameter name="guid" type="string" required="true"></parameter>
+    	</parameters>
+    	<resource type="velocity" name="help" location="eadiagramhelp.vm">
+        	<param name="help-section" value="external"/>
+   		</resource>
+    </macro>
+    
+    
+</atlassian-plugin>

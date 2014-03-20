@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="EaToConfluenceAddin" Language="1033" Version="1.0.0.0" Manufacturer="Automic Software GmbH" UpgradeCode="6c1f62f8-349a-4527-9398-40ee8cba4de3" >
+		<Package InstallerVersion="200" Compressed="yes" Description="With this EA Plugin you can quickly publish EA diagrams to Confluence" InstallScope="perMachine" Manufacturer="Benedikt Eckhard"  />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of EaToConfluenceAddin is already installed."/>
+		<MediaTemplate EmbedCab="yes" />
+
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="EaToConfluence Addin">
+          <Component Id="TblComponent" Guid="{D0DB1416-93A9-4274-A89A-F72B0DF7A796}">
+            <File Id='PluginTLB' Name='EaAddIn.tlb' DiskId='1' Source='$(var.EaAddIn.TargetPath)' KeyPath='yes' />
+          </Component>
+          
+          
+        </Directory>
+      </Directory>
+
+      <Component Id="RegistryEntries" Guid="{971CE6C6-29FC-4ABF-B387-6E8EE031B0F7}">
+        <RegistryKey Root="HKCU" Key="Software\Sparx Systems\EAAddins\EaAddIn">
+          <RegistryValue Type="string" Value="EaAddIn.PublishToConfluence"/>
+        </RegistryKey>
+      </Component>
+      
+    </Directory>
+    
+    
+		<Feature Id="ProductFeature" Title="EaToConfluence Addin" Level="1">
+			<ComponentRef Id="DllComponent" />
+      <ComponentRef Id="TblComponent" />
+      <ComponentRef Id="RegistryEntries" />
+		</Feature>
+    
+	</Product>
+  
+  <Fragment>
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="DllComponent" Guid="{E727C6C1-97E9-4025-9C24-6D14C92EB412}">
+        <Class Id="{01632153-DECF-3C25-8A11-B00BE701D12B}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteConfluenceUser" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteConfluenceUser" Description="EaAddIn.Confluence.RemoteConfluenceUser" />
+        </Class>
+        <Class Id="{068855B1-5B81-3007-B8B7-4C47960CAEE0}" Context="InprocServer32" Description="EaAddIn.Confluence.RemotePage" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemotePage" Description="EaAddIn.Confluence.RemotePage" />
+        </Class>
+        <Class Id="{0ED21740-ACCF-347E-B663-452D54B8FE13}" Context="InprocServer32" Description="EaAddIn.Confluence.Map" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.Map" Description="EaAddIn.Confluence.Map" />
+        </Class>
+        <Class Id="{1920BC75-1981-38C4-A42B-1E6FE341AC64}" Context="InprocServer32" Description="EaAddIn.Confluence.RemotePermission" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemotePermission" Description="EaAddIn.Confluence.RemotePermission" />
+        </Class>
+        <Class Id="{214AB667-3C57-3C3D-BAF5-6CFFBB8ED563}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteContentSummary" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteContentSummary" Description="EaAddIn.Confluence.RemoteContentSummary" />
+        </Class>
+        <Class Id="{24C9A9DC-0113-3721-AE93-3AC2E710AD0F}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteClusterInformation" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteClusterInformation" Description="EaAddIn.Confluence.RemoteClusterInformation" />
+        </Class>
+        <Class Id="{2979904A-ADE5-325A-9635-41DE448D0B21}" Context="InprocServer32" Description="EaAddIn.Confluence.AuthenticationFailedException" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.AuthenticationFailedException" Description="EaAddIn.Confluence.AuthenticationFailedException" />
+        </Class>
+        <Class Id="{2BC26544-EDDC-35A1-A1A7-9921A2A4A3EA}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteContentSummaries" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteContentSummaries" Description="EaAddIn.Confluence.RemoteContentSummaries" />
+        </Class>
+        <Class Id="{34E5404D-896B-364B-B3F3-358A02BDA35E}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteAttachment" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteAttachment" Description="EaAddIn.Confluence.RemoteAttachment" />
+        </Class>
+        <Class Id="{3A50B4E7-36DF-3B4E-82B5-3BE96909A809}" Context="InprocServer32" Description="EaAddIn.Confluence.RemotePageHistory" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemotePageHistory" Description="EaAddIn.Confluence.RemotePageHistory" />
+        </Class>
+        <Class Id="{3FD191AD-E71A-30CF-9C8B-BA14DB71F7D2}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteSearchResult" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteSearchResult" Description="EaAddIn.Confluence.RemoteSearchResult" />
+        </Class>
+        <Class Id="{497FC0D4-B750-3AE2-88C4-BEE8CC2FF4D7}" Context="InprocServer32" Description="EaAddIn.Credentials" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Credentials" Description="EaAddIn.Credentials" />
+        </Class>
+        <Class Id="{4B572B9A-355D-3882-8235-1F15D78E381F}" Context="InprocServer32" Description="EaAddIn.PublishToConfluence" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.PublishToConfluence" Description="EaAddIn.PublishToConfluence" />
+        </Class>
+        <Class Id="{514C5271-859C-37D2-A4B8-592F0115EF22}" Context="InprocServer32" Description="EaAddIn.Confluence.NotPermittedException" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.NotPermittedException" Description="EaAddIn.Confluence.NotPermittedException" />
+        </Class>
+        <Class Id="{5267BC69-F9F7-3D2C-9804-080023BB285D}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteSpaceSummary" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteSpaceSummary" Description="EaAddIn.Confluence.RemoteSpaceSummary" />
+        </Class>
+        <Class Id="{59487710-9302-38C7-839C-D96B08338BD2}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteBlogEntry" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteBlogEntry" Description="EaAddIn.Confluence.RemoteBlogEntry" />
+        </Class>
+        <Class Id="{6338E73E-17FC-35DE-A9B4-5D3B4BCEBEF8}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteUser" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteUser" Description="EaAddIn.Confluence.RemoteUser" />
+        </Class>
+        <Class Id="{643C132A-1A31-3F28-AE5A-C443BF0BA2C8}" Context="InprocServer32" Description="EaAddIn.Confluence.mapItem" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.mapItem" Description="EaAddIn.Confluence.mapItem" />
+        </Class>
+        <Class Id="{66484966-70B5-3751-BBC7-A81471922017}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteUserInformation" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteUserInformation" Description="EaAddIn.Confluence.RemoteUserInformation" />
+        </Class>
+        <Class Id="{7337D149-261E-3391-B57D-C69E6A3A13F4}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteBlogEntrySummary" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteBlogEntrySummary" Description="EaAddIn.Confluence.RemoteBlogEntrySummary" />
+        </Class>
+        <Class Id="{75B89C6A-F077-3FCF-84E7-05801435EE97}" Context="InprocServer32" Description="EaAddIn.Confluence.AlreadyExistsException" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.AlreadyExistsException" Description="EaAddIn.Confluence.AlreadyExistsException" />
+        </Class>
+        <Class Id="{7A2BDCA4-D8F4-34DC-97DD-2612657E7490}" Context="InprocServer32" Description="EaAddIn.Confluence.VersionMismatchException" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.VersionMismatchException" Description="EaAddIn.Confluence.VersionMismatchException" />
+        </Class>
+        <Class Id="{7B32CB7D-7C09-3B0A-9F34-92DA3E6ED512}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteNodeStatus" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteNodeStatus" Description="EaAddIn.Confluence.RemoteNodeStatus" />
+        </Class>
+        <Class Id="{7EB4F329-118E-363C-A352-44B86BD4E174}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteContentPermissionSet" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteContentPermissionSet" Description="EaAddIn.Confluence.RemoteContentPermissionSet" />
+        </Class>
+        <Class Id="{897D4E07-C4B2-38B6-8C54-52605A59DE55}" Context="InprocServer32" Description="EaAddIn.Confluence.RemotePageSummary" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemotePageSummary" Description="EaAddIn.Confluence.RemotePageSummary" />
+        </Class>
+        <Class Id="{8E5ECD53-B12D-30B0-8080-77F9350DEBED}" Context="InprocServer32" Description="EaAddIn.Publish" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Publish" Description="EaAddIn.Publish" />
+        </Class>
+        <Class Id="{91EBFD39-86B9-3A36-8014-8855B97627CC}" Context="InprocServer32" Description="EaAddIn.Confluence.Vector" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.Vector" Description="EaAddIn.Confluence.Vector" />
+        </Class>
+        <Class Id="{A2723B1D-B1B8-3993-98E7-933AD645449F}" Context="InprocServer32" Description="EaAddIn.Confluence.InvalidSessionException" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.InvalidSessionException" Description="EaAddIn.Confluence.InvalidSessionException" />
+        </Class>
+        <Class Id="{A32A2CFF-9BE6-3262-9482-AB891DE692B3}" Context="InprocServer32" Description="PublishToConfluence.ConfluenceUploadService" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="PublishToConfluence.ConfluenceUploadService" Description="PublishToConfluence.ConfluenceUploadService" />
+        </Class>
+        <Class Id="{AFB7601A-7195-3774-A0F1-E37A30DEEE03}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteContentPermission" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteContentPermission" Description="EaAddIn.Confluence.RemoteContentPermission" />
+        </Class>
+        <Class Id="{B041DFC8-8CB7-37F7-8461-4B878E2ED01D}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteSpace" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteSpace" Description="EaAddIn.Confluence.RemoteSpace" />
+        </Class>
+        <Class Id="{BA18CC46-933F-3ED8-B184-6D1EA94D8E41}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteSpaceGroup" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteSpaceGroup" Description="EaAddIn.Confluence.RemoteSpaceGroup" />
+        </Class>
+        <Class Id="{BE7AD106-C412-3114-9A83-FE6B2C1416C7}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteException" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteException" Description="EaAddIn.Confluence.RemoteException" />
+        </Class>
+        <Class Id="{C296D32A-AFF6-38F3-9B4D-CC5F1022B3C1}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteServerInfo" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteServerInfo" Description="EaAddIn.Confluence.RemoteServerInfo" />
+        </Class>
+        <Class Id="{C94F6AB4-F09E-3763-9055-88053063285B}" Context="InprocServer32" Description="EaAddIn.Confluence.RemotePageUpdateOptions" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemotePageUpdateOptions" Description="EaAddIn.Confluence.RemotePageUpdateOptions" />
+        </Class>
+        <Class Id="{D1AF167D-CB3C-3589-8155-5185583FB98B}" Context="InprocServer32" Description="EaAddIn.CredentialService" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.CredentialService" Description="EaAddIn.CredentialService" />
+        </Class>
+        <Class Id="{E5B3BD79-1468-3656-BD90-FB3C1429AECB}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteLabel" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteLabel" Description="EaAddIn.Confluence.RemoteLabel" />
+        </Class>
+        <Class Id="{EDA4BD19-8D98-369A-A773-6386EAAD493C}" Context="InprocServer32" Description="EaAddIn.Confluence.RemoteComment" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.RemoteComment" Description="EaAddIn.Confluence.RemoteComment" />
+        </Class>
+        <Class Id="{EDFFBA25-6A47-3481-BBA2-5FE3D7CBF136}" Context="InprocServer32" Description="EaAddIn.Confluence.ConfluenceSoapServiceService" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EaAddIn.Confluence.ConfluenceSoapServiceService" Description="EaAddIn.Confluence.ConfluenceSoapServiceService" />
+        </Class>
+        <File Id="fil050AE7C88063DE4A7047F0B12F470951" KeyPath="yes" DiskId='1' Name="EaAddIn.dll" Source='$(var.EaAddIn.TargetPath)' />
+        <ProgId Id="Record" />
+        <RegistryValue Root="HKCR" Key="CLSID\{01632153-DECF-3C25-8A11-B00BE701D12B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{01632153-DECF-3C25-8A11-B00BE701D12B}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteConfluenceUser" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{01632153-DECF-3C25-8A11-B00BE701D12B}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{01632153-DECF-3C25-8A11-B00BE701D12B}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{01632153-DECF-3C25-8A11-B00BE701D12B}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{01632153-DECF-3C25-8A11-B00BE701D12B}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteConfluenceUser" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{01632153-DECF-3C25-8A11-B00BE701D12B}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{01632153-DECF-3C25-8A11-B00BE701D12B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{01632153-DECF-3C25-8A11-B00BE701D12B}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{068855B1-5B81-3007-B8B7-4C47960CAEE0}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{068855B1-5B81-3007-B8B7-4C47960CAEE0}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemotePage" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{068855B1-5B81-3007-B8B7-4C47960CAEE0}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{068855B1-5B81-3007-B8B7-4C47960CAEE0}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{068855B1-5B81-3007-B8B7-4C47960CAEE0}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{068855B1-5B81-3007-B8B7-4C47960CAEE0}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemotePage" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{068855B1-5B81-3007-B8B7-4C47960CAEE0}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{068855B1-5B81-3007-B8B7-4C47960CAEE0}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{068855B1-5B81-3007-B8B7-4C47960CAEE0}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{0ED21740-ACCF-347E-B663-452D54B8FE13}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{0ED21740-ACCF-347E-B663-452D54B8FE13}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.Map" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{0ED21740-ACCF-347E-B663-452D54B8FE13}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{0ED21740-ACCF-347E-B663-452D54B8FE13}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{0ED21740-ACCF-347E-B663-452D54B8FE13}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{0ED21740-ACCF-347E-B663-452D54B8FE13}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.Map" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{0ED21740-ACCF-347E-B663-452D54B8FE13}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{0ED21740-ACCF-347E-B663-452D54B8FE13}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{0ED21740-ACCF-347E-B663-452D54B8FE13}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{1920BC75-1981-38C4-A42B-1E6FE341AC64}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{1920BC75-1981-38C4-A42B-1E6FE341AC64}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemotePermission" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{1920BC75-1981-38C4-A42B-1E6FE341AC64}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{1920BC75-1981-38C4-A42B-1E6FE341AC64}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{1920BC75-1981-38C4-A42B-1E6FE341AC64}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{1920BC75-1981-38C4-A42B-1E6FE341AC64}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemotePermission" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{1920BC75-1981-38C4-A42B-1E6FE341AC64}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{1920BC75-1981-38C4-A42B-1E6FE341AC64}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{1920BC75-1981-38C4-A42B-1E6FE341AC64}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{214AB667-3C57-3C3D-BAF5-6CFFBB8ED563}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{214AB667-3C57-3C3D-BAF5-6CFFBB8ED563}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteContentSummary" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{214AB667-3C57-3C3D-BAF5-6CFFBB8ED563}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{214AB667-3C57-3C3D-BAF5-6CFFBB8ED563}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{214AB667-3C57-3C3D-BAF5-6CFFBB8ED563}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{214AB667-3C57-3C3D-BAF5-6CFFBB8ED563}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteContentSummary" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{214AB667-3C57-3C3D-BAF5-6CFFBB8ED563}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{214AB667-3C57-3C3D-BAF5-6CFFBB8ED563}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{214AB667-3C57-3C3D-BAF5-6CFFBB8ED563}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C9A9DC-0113-3721-AE93-3AC2E710AD0F}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C9A9DC-0113-3721-AE93-3AC2E710AD0F}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteClusterInformation" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C9A9DC-0113-3721-AE93-3AC2E710AD0F}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C9A9DC-0113-3721-AE93-3AC2E710AD0F}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C9A9DC-0113-3721-AE93-3AC2E710AD0F}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C9A9DC-0113-3721-AE93-3AC2E710AD0F}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteClusterInformation" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C9A9DC-0113-3721-AE93-3AC2E710AD0F}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C9A9DC-0113-3721-AE93-3AC2E710AD0F}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C9A9DC-0113-3721-AE93-3AC2E710AD0F}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2979904A-ADE5-325A-9635-41DE448D0B21}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2979904A-ADE5-325A-9635-41DE448D0B21}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.AuthenticationFailedException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2979904A-ADE5-325A-9635-41DE448D0B21}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2979904A-ADE5-325A-9635-41DE448D0B21}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2979904A-ADE5-325A-9635-41DE448D0B21}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2979904A-ADE5-325A-9635-41DE448D0B21}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.AuthenticationFailedException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2979904A-ADE5-325A-9635-41DE448D0B21}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2979904A-ADE5-325A-9635-41DE448D0B21}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2979904A-ADE5-325A-9635-41DE448D0B21}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2BC26544-EDDC-35A1-A1A7-9921A2A4A3EA}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2BC26544-EDDC-35A1-A1A7-9921A2A4A3EA}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteContentSummaries" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2BC26544-EDDC-35A1-A1A7-9921A2A4A3EA}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2BC26544-EDDC-35A1-A1A7-9921A2A4A3EA}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2BC26544-EDDC-35A1-A1A7-9921A2A4A3EA}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2BC26544-EDDC-35A1-A1A7-9921A2A4A3EA}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteContentSummaries" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2BC26544-EDDC-35A1-A1A7-9921A2A4A3EA}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2BC26544-EDDC-35A1-A1A7-9921A2A4A3EA}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{2BC26544-EDDC-35A1-A1A7-9921A2A4A3EA}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{34E5404D-896B-364B-B3F3-358A02BDA35E}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{34E5404D-896B-364B-B3F3-358A02BDA35E}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteAttachment" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{34E5404D-896B-364B-B3F3-358A02BDA35E}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{34E5404D-896B-364B-B3F3-358A02BDA35E}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{34E5404D-896B-364B-B3F3-358A02BDA35E}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{34E5404D-896B-364B-B3F3-358A02BDA35E}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteAttachment" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{34E5404D-896B-364B-B3F3-358A02BDA35E}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{34E5404D-896B-364B-B3F3-358A02BDA35E}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{34E5404D-896B-364B-B3F3-358A02BDA35E}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3A50B4E7-36DF-3B4E-82B5-3BE96909A809}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3A50B4E7-36DF-3B4E-82B5-3BE96909A809}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemotePageHistory" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3A50B4E7-36DF-3B4E-82B5-3BE96909A809}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3A50B4E7-36DF-3B4E-82B5-3BE96909A809}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3A50B4E7-36DF-3B4E-82B5-3BE96909A809}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3A50B4E7-36DF-3B4E-82B5-3BE96909A809}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemotePageHistory" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3A50B4E7-36DF-3B4E-82B5-3BE96909A809}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3A50B4E7-36DF-3B4E-82B5-3BE96909A809}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3A50B4E7-36DF-3B4E-82B5-3BE96909A809}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3FD191AD-E71A-30CF-9C8B-BA14DB71F7D2}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3FD191AD-E71A-30CF-9C8B-BA14DB71F7D2}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteSearchResult" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3FD191AD-E71A-30CF-9C8B-BA14DB71F7D2}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3FD191AD-E71A-30CF-9C8B-BA14DB71F7D2}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3FD191AD-E71A-30CF-9C8B-BA14DB71F7D2}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3FD191AD-E71A-30CF-9C8B-BA14DB71F7D2}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteSearchResult" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3FD191AD-E71A-30CF-9C8B-BA14DB71F7D2}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3FD191AD-E71A-30CF-9C8B-BA14DB71F7D2}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{3FD191AD-E71A-30CF-9C8B-BA14DB71F7D2}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{497FC0D4-B750-3AE2-88C4-BEE8CC2FF4D7}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{497FC0D4-B750-3AE2-88C4-BEE8CC2FF4D7}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Credentials" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{497FC0D4-B750-3AE2-88C4-BEE8CC2FF4D7}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{497FC0D4-B750-3AE2-88C4-BEE8CC2FF4D7}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{497FC0D4-B750-3AE2-88C4-BEE8CC2FF4D7}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{497FC0D4-B750-3AE2-88C4-BEE8CC2FF4D7}\InprocServer32" Name="Class" Value="EaAddIn.Credentials" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{497FC0D4-B750-3AE2-88C4-BEE8CC2FF4D7}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{497FC0D4-B750-3AE2-88C4-BEE8CC2FF4D7}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{497FC0D4-B750-3AE2-88C4-BEE8CC2FF4D7}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4B572B9A-355D-3882-8235-1F15D78E381F}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4B572B9A-355D-3882-8235-1F15D78E381F}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.PublishToConfluence" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4B572B9A-355D-3882-8235-1F15D78E381F}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4B572B9A-355D-3882-8235-1F15D78E381F}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4B572B9A-355D-3882-8235-1F15D78E381F}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4B572B9A-355D-3882-8235-1F15D78E381F}\InprocServer32" Name="Class" Value="EaAddIn.PublishToConfluence" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4B572B9A-355D-3882-8235-1F15D78E381F}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4B572B9A-355D-3882-8235-1F15D78E381F}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{4B572B9A-355D-3882-8235-1F15D78E381F}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{514C5271-859C-37D2-A4B8-592F0115EF22}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{514C5271-859C-37D2-A4B8-592F0115EF22}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.NotPermittedException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{514C5271-859C-37D2-A4B8-592F0115EF22}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{514C5271-859C-37D2-A4B8-592F0115EF22}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{514C5271-859C-37D2-A4B8-592F0115EF22}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{514C5271-859C-37D2-A4B8-592F0115EF22}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.NotPermittedException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{514C5271-859C-37D2-A4B8-592F0115EF22}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{514C5271-859C-37D2-A4B8-592F0115EF22}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{514C5271-859C-37D2-A4B8-592F0115EF22}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5267BC69-F9F7-3D2C-9804-080023BB285D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5267BC69-F9F7-3D2C-9804-080023BB285D}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteSpaceSummary" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5267BC69-F9F7-3D2C-9804-080023BB285D}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5267BC69-F9F7-3D2C-9804-080023BB285D}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5267BC69-F9F7-3D2C-9804-080023BB285D}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5267BC69-F9F7-3D2C-9804-080023BB285D}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteSpaceSummary" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5267BC69-F9F7-3D2C-9804-080023BB285D}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5267BC69-F9F7-3D2C-9804-080023BB285D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5267BC69-F9F7-3D2C-9804-080023BB285D}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{59487710-9302-38C7-839C-D96B08338BD2}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{59487710-9302-38C7-839C-D96B08338BD2}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteBlogEntry" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{59487710-9302-38C7-839C-D96B08338BD2}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{59487710-9302-38C7-839C-D96B08338BD2}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{59487710-9302-38C7-839C-D96B08338BD2}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{59487710-9302-38C7-839C-D96B08338BD2}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteBlogEntry" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{59487710-9302-38C7-839C-D96B08338BD2}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{59487710-9302-38C7-839C-D96B08338BD2}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{59487710-9302-38C7-839C-D96B08338BD2}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6338E73E-17FC-35DE-A9B4-5D3B4BCEBEF8}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6338E73E-17FC-35DE-A9B4-5D3B4BCEBEF8}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteUser" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6338E73E-17FC-35DE-A9B4-5D3B4BCEBEF8}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6338E73E-17FC-35DE-A9B4-5D3B4BCEBEF8}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6338E73E-17FC-35DE-A9B4-5D3B4BCEBEF8}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6338E73E-17FC-35DE-A9B4-5D3B4BCEBEF8}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteUser" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6338E73E-17FC-35DE-A9B4-5D3B4BCEBEF8}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6338E73E-17FC-35DE-A9B4-5D3B4BCEBEF8}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{6338E73E-17FC-35DE-A9B4-5D3B4BCEBEF8}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{643C132A-1A31-3F28-AE5A-C443BF0BA2C8}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{643C132A-1A31-3F28-AE5A-C443BF0BA2C8}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.mapItem" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{643C132A-1A31-3F28-AE5A-C443BF0BA2C8}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{643C132A-1A31-3F28-AE5A-C443BF0BA2C8}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{643C132A-1A31-3F28-AE5A-C443BF0BA2C8}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{643C132A-1A31-3F28-AE5A-C443BF0BA2C8}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.mapItem" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{643C132A-1A31-3F28-AE5A-C443BF0BA2C8}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{643C132A-1A31-3F28-AE5A-C443BF0BA2C8}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{643C132A-1A31-3F28-AE5A-C443BF0BA2C8}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{66484966-70B5-3751-BBC7-A81471922017}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{66484966-70B5-3751-BBC7-A81471922017}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteUserInformation" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{66484966-70B5-3751-BBC7-A81471922017}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{66484966-70B5-3751-BBC7-A81471922017}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{66484966-70B5-3751-BBC7-A81471922017}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{66484966-70B5-3751-BBC7-A81471922017}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteUserInformation" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{66484966-70B5-3751-BBC7-A81471922017}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{66484966-70B5-3751-BBC7-A81471922017}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{66484966-70B5-3751-BBC7-A81471922017}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7337D149-261E-3391-B57D-C69E6A3A13F4}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7337D149-261E-3391-B57D-C69E6A3A13F4}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteBlogEntrySummary" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7337D149-261E-3391-B57D-C69E6A3A13F4}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7337D149-261E-3391-B57D-C69E6A3A13F4}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7337D149-261E-3391-B57D-C69E6A3A13F4}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7337D149-261E-3391-B57D-C69E6A3A13F4}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteBlogEntrySummary" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7337D149-261E-3391-B57D-C69E6A3A13F4}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7337D149-261E-3391-B57D-C69E6A3A13F4}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7337D149-261E-3391-B57D-C69E6A3A13F4}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{75B89C6A-F077-3FCF-84E7-05801435EE97}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{75B89C6A-F077-3FCF-84E7-05801435EE97}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.AlreadyExistsException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{75B89C6A-F077-3FCF-84E7-05801435EE97}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{75B89C6A-F077-3FCF-84E7-05801435EE97}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{75B89C6A-F077-3FCF-84E7-05801435EE97}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{75B89C6A-F077-3FCF-84E7-05801435EE97}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.AlreadyExistsException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{75B89C6A-F077-3FCF-84E7-05801435EE97}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{75B89C6A-F077-3FCF-84E7-05801435EE97}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{75B89C6A-F077-3FCF-84E7-05801435EE97}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7A2BDCA4-D8F4-34DC-97DD-2612657E7490}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7A2BDCA4-D8F4-34DC-97DD-2612657E7490}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.VersionMismatchException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7A2BDCA4-D8F4-34DC-97DD-2612657E7490}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7A2BDCA4-D8F4-34DC-97DD-2612657E7490}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7A2BDCA4-D8F4-34DC-97DD-2612657E7490}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7A2BDCA4-D8F4-34DC-97DD-2612657E7490}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.VersionMismatchException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7A2BDCA4-D8F4-34DC-97DD-2612657E7490}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7A2BDCA4-D8F4-34DC-97DD-2612657E7490}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7A2BDCA4-D8F4-34DC-97DD-2612657E7490}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7B32CB7D-7C09-3B0A-9F34-92DA3E6ED512}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7B32CB7D-7C09-3B0A-9F34-92DA3E6ED512}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteNodeStatus" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7B32CB7D-7C09-3B0A-9F34-92DA3E6ED512}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7B32CB7D-7C09-3B0A-9F34-92DA3E6ED512}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7B32CB7D-7C09-3B0A-9F34-92DA3E6ED512}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7B32CB7D-7C09-3B0A-9F34-92DA3E6ED512}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteNodeStatus" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7B32CB7D-7C09-3B0A-9F34-92DA3E6ED512}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7B32CB7D-7C09-3B0A-9F34-92DA3E6ED512}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7B32CB7D-7C09-3B0A-9F34-92DA3E6ED512}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7EB4F329-118E-363C-A352-44B86BD4E174}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7EB4F329-118E-363C-A352-44B86BD4E174}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteContentPermissionSet" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7EB4F329-118E-363C-A352-44B86BD4E174}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7EB4F329-118E-363C-A352-44B86BD4E174}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7EB4F329-118E-363C-A352-44B86BD4E174}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7EB4F329-118E-363C-A352-44B86BD4E174}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteContentPermissionSet" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7EB4F329-118E-363C-A352-44B86BD4E174}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7EB4F329-118E-363C-A352-44B86BD4E174}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{7EB4F329-118E-363C-A352-44B86BD4E174}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{897D4E07-C4B2-38B6-8C54-52605A59DE55}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{897D4E07-C4B2-38B6-8C54-52605A59DE55}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemotePageSummary" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{897D4E07-C4B2-38B6-8C54-52605A59DE55}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{897D4E07-C4B2-38B6-8C54-52605A59DE55}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{897D4E07-C4B2-38B6-8C54-52605A59DE55}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{897D4E07-C4B2-38B6-8C54-52605A59DE55}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemotePageSummary" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{897D4E07-C4B2-38B6-8C54-52605A59DE55}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{897D4E07-C4B2-38B6-8C54-52605A59DE55}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{897D4E07-C4B2-38B6-8C54-52605A59DE55}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8E5ECD53-B12D-30B0-8080-77F9350DEBED}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8E5ECD53-B12D-30B0-8080-77F9350DEBED}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Publish" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8E5ECD53-B12D-30B0-8080-77F9350DEBED}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8E5ECD53-B12D-30B0-8080-77F9350DEBED}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8E5ECD53-B12D-30B0-8080-77F9350DEBED}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8E5ECD53-B12D-30B0-8080-77F9350DEBED}\InprocServer32" Name="Class" Value="EaAddIn.Publish" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8E5ECD53-B12D-30B0-8080-77F9350DEBED}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8E5ECD53-B12D-30B0-8080-77F9350DEBED}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8E5ECD53-B12D-30B0-8080-77F9350DEBED}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{91EBFD39-86B9-3A36-8014-8855B97627CC}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{91EBFD39-86B9-3A36-8014-8855B97627CC}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.Vector" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{91EBFD39-86B9-3A36-8014-8855B97627CC}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{91EBFD39-86B9-3A36-8014-8855B97627CC}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{91EBFD39-86B9-3A36-8014-8855B97627CC}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{91EBFD39-86B9-3A36-8014-8855B97627CC}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.Vector" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{91EBFD39-86B9-3A36-8014-8855B97627CC}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{91EBFD39-86B9-3A36-8014-8855B97627CC}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{91EBFD39-86B9-3A36-8014-8855B97627CC}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A2723B1D-B1B8-3993-98E7-933AD645449F}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A2723B1D-B1B8-3993-98E7-933AD645449F}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.InvalidSessionException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A2723B1D-B1B8-3993-98E7-933AD645449F}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A2723B1D-B1B8-3993-98E7-933AD645449F}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A2723B1D-B1B8-3993-98E7-933AD645449F}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A2723B1D-B1B8-3993-98E7-933AD645449F}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.InvalidSessionException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A2723B1D-B1B8-3993-98E7-933AD645449F}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A2723B1D-B1B8-3993-98E7-933AD645449F}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A2723B1D-B1B8-3993-98E7-933AD645449F}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A32A2CFF-9BE6-3262-9482-AB891DE692B3}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A32A2CFF-9BE6-3262-9482-AB891DE692B3}\InprocServer32\1.0.0.0" Name="Class" Value="PublishToConfluence.ConfluenceUploadService" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A32A2CFF-9BE6-3262-9482-AB891DE692B3}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A32A2CFF-9BE6-3262-9482-AB891DE692B3}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A32A2CFF-9BE6-3262-9482-AB891DE692B3}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A32A2CFF-9BE6-3262-9482-AB891DE692B3}\InprocServer32" Name="Class" Value="PublishToConfluence.ConfluenceUploadService" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A32A2CFF-9BE6-3262-9482-AB891DE692B3}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A32A2CFF-9BE6-3262-9482-AB891DE692B3}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{A32A2CFF-9BE6-3262-9482-AB891DE692B3}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{AFB7601A-7195-3774-A0F1-E37A30DEEE03}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{AFB7601A-7195-3774-A0F1-E37A30DEEE03}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteContentPermission" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{AFB7601A-7195-3774-A0F1-E37A30DEEE03}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{AFB7601A-7195-3774-A0F1-E37A30DEEE03}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{AFB7601A-7195-3774-A0F1-E37A30DEEE03}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{AFB7601A-7195-3774-A0F1-E37A30DEEE03}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteContentPermission" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{AFB7601A-7195-3774-A0F1-E37A30DEEE03}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{AFB7601A-7195-3774-A0F1-E37A30DEEE03}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{AFB7601A-7195-3774-A0F1-E37A30DEEE03}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B041DFC8-8CB7-37F7-8461-4B878E2ED01D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B041DFC8-8CB7-37F7-8461-4B878E2ED01D}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteSpace" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B041DFC8-8CB7-37F7-8461-4B878E2ED01D}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B041DFC8-8CB7-37F7-8461-4B878E2ED01D}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B041DFC8-8CB7-37F7-8461-4B878E2ED01D}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B041DFC8-8CB7-37F7-8461-4B878E2ED01D}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteSpace" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B041DFC8-8CB7-37F7-8461-4B878E2ED01D}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B041DFC8-8CB7-37F7-8461-4B878E2ED01D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B041DFC8-8CB7-37F7-8461-4B878E2ED01D}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BA18CC46-933F-3ED8-B184-6D1EA94D8E41}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BA18CC46-933F-3ED8-B184-6D1EA94D8E41}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteSpaceGroup" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BA18CC46-933F-3ED8-B184-6D1EA94D8E41}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BA18CC46-933F-3ED8-B184-6D1EA94D8E41}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BA18CC46-933F-3ED8-B184-6D1EA94D8E41}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BA18CC46-933F-3ED8-B184-6D1EA94D8E41}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteSpaceGroup" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BA18CC46-933F-3ED8-B184-6D1EA94D8E41}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BA18CC46-933F-3ED8-B184-6D1EA94D8E41}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BA18CC46-933F-3ED8-B184-6D1EA94D8E41}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BE7AD106-C412-3114-9A83-FE6B2C1416C7}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BE7AD106-C412-3114-9A83-FE6B2C1416C7}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BE7AD106-C412-3114-9A83-FE6B2C1416C7}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BE7AD106-C412-3114-9A83-FE6B2C1416C7}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BE7AD106-C412-3114-9A83-FE6B2C1416C7}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BE7AD106-C412-3114-9A83-FE6B2C1416C7}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteException" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BE7AD106-C412-3114-9A83-FE6B2C1416C7}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BE7AD106-C412-3114-9A83-FE6B2C1416C7}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{BE7AD106-C412-3114-9A83-FE6B2C1416C7}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C296D32A-AFF6-38F3-9B4D-CC5F1022B3C1}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C296D32A-AFF6-38F3-9B4D-CC5F1022B3C1}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteServerInfo" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C296D32A-AFF6-38F3-9B4D-CC5F1022B3C1}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C296D32A-AFF6-38F3-9B4D-CC5F1022B3C1}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C296D32A-AFF6-38F3-9B4D-CC5F1022B3C1}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C296D32A-AFF6-38F3-9B4D-CC5F1022B3C1}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteServerInfo" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C296D32A-AFF6-38F3-9B4D-CC5F1022B3C1}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C296D32A-AFF6-38F3-9B4D-CC5F1022B3C1}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C296D32A-AFF6-38F3-9B4D-CC5F1022B3C1}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C94F6AB4-F09E-3763-9055-88053063285B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C94F6AB4-F09E-3763-9055-88053063285B}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemotePageUpdateOptions" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C94F6AB4-F09E-3763-9055-88053063285B}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C94F6AB4-F09E-3763-9055-88053063285B}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C94F6AB4-F09E-3763-9055-88053063285B}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C94F6AB4-F09E-3763-9055-88053063285B}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemotePageUpdateOptions" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C94F6AB4-F09E-3763-9055-88053063285B}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C94F6AB4-F09E-3763-9055-88053063285B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C94F6AB4-F09E-3763-9055-88053063285B}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{D1AF167D-CB3C-3589-8155-5185583FB98B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{D1AF167D-CB3C-3589-8155-5185583FB98B}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.CredentialService" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{D1AF167D-CB3C-3589-8155-5185583FB98B}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{D1AF167D-CB3C-3589-8155-5185583FB98B}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{D1AF167D-CB3C-3589-8155-5185583FB98B}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{D1AF167D-CB3C-3589-8155-5185583FB98B}\InprocServer32" Name="Class" Value="EaAddIn.CredentialService" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{D1AF167D-CB3C-3589-8155-5185583FB98B}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{D1AF167D-CB3C-3589-8155-5185583FB98B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{D1AF167D-CB3C-3589-8155-5185583FB98B}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{E5B3BD79-1468-3656-BD90-FB3C1429AECB}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{E5B3BD79-1468-3656-BD90-FB3C1429AECB}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteLabel" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{E5B3BD79-1468-3656-BD90-FB3C1429AECB}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{E5B3BD79-1468-3656-BD90-FB3C1429AECB}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{E5B3BD79-1468-3656-BD90-FB3C1429AECB}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{E5B3BD79-1468-3656-BD90-FB3C1429AECB}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteLabel" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{E5B3BD79-1468-3656-BD90-FB3C1429AECB}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{E5B3BD79-1468-3656-BD90-FB3C1429AECB}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{E5B3BD79-1468-3656-BD90-FB3C1429AECB}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDA4BD19-8D98-369A-A773-6386EAAD493C}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDA4BD19-8D98-369A-A773-6386EAAD493C}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.RemoteComment" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDA4BD19-8D98-369A-A773-6386EAAD493C}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDA4BD19-8D98-369A-A773-6386EAAD493C}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDA4BD19-8D98-369A-A773-6386EAAD493C}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDA4BD19-8D98-369A-A773-6386EAAD493C}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.RemoteComment" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDA4BD19-8D98-369A-A773-6386EAAD493C}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDA4BD19-8D98-369A-A773-6386EAAD493C}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDA4BD19-8D98-369A-A773-6386EAAD493C}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDFFBA25-6A47-3481-BBA2-5FE3D7CBF136}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDFFBA25-6A47-3481-BBA2-5FE3D7CBF136}\InprocServer32\1.0.0.0" Name="Class" Value="EaAddIn.Confluence.ConfluenceSoapServiceService" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDFFBA25-6A47-3481-BBA2-5FE3D7CBF136}\InprocServer32\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDFFBA25-6A47-3481-BBA2-5FE3D7CBF136}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDFFBA25-6A47-3481-BBA2-5FE3D7CBF136}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDFFBA25-6A47-3481-BBA2-5FE3D7CBF136}\InprocServer32" Name="Class" Value="EaAddIn.Confluence.ConfluenceSoapServiceService" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDFFBA25-6A47-3481-BBA2-5FE3D7CBF136}\InprocServer32" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDFFBA25-6A47-3481-BBA2-5FE3D7CBF136}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{EDFFBA25-6A47-3481-BBA2-5FE3D7CBF136}\InprocServer32" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.0.0" Name="Class" Value="EA.ObjectType" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.0.0" Name="Assembly" Value="EaAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.0.0" Name="CodeBase" Value="file:///[#fil050AE7C88063DE4A7047F0B12F470951]" Type="string" Action="write" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+  
+</Wix>
